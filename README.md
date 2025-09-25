@@ -15,7 +15,7 @@ Extensive experiments on **PLC-CECT** and **MPLL** demonstrate that OurMethod co
 | [PLC-CECT](https://github.com/ljwa2323/PLC_CECT) | Multi (NC/ART/PV/DL)  | 278 patients / 152,965 slices     | 
 | MPLL                                             | Multi (ART/PV/DL)     | 141 patients / 952,601 slices     | 
 
-<img src="" width="500">
+<img src="https://github.com/jylEcho/ICLR26_CSF-Net/blob/main/img/Swin-V5.0.png" width="500">
 
 ## 👉 Why Multi-Phase CECT?
 
@@ -47,19 +47,16 @@ These phases are complementary, making multi-phase fusion a powerful strategy fo
 
 Extensive experiments on two benchmark datasets, LiTS2017 and MPLL, demonstrate the superiority of our proposed method, which significantly outperforms existing state-of-the-art approaches.
 
-## Usage
-
-##  一、Multi-Phase Experiments
-
-### Pre-trained Weights  
-
-The weights of the pre-trained MADF-Net in 1P、2P、3P comparative analysis could be downloaded [Here](https://drive.google.com/drive/folders/1FSgOOqEkdjfBTvYudSf9NAxIwG3CxWxW?usp=drive_link)  
+## Getting Started
 
 ### Before Experiments：Create your conda environment
 
+We recommend using **conda** for a clean and reproducible environment.  
+
 1、environments:Linux 5.4.0
 
-2、Create a virtual environment: conda create -n environment_name python=3.8 -y and conda activate environment_name.
+2、conda create -n liverseg python=3.8 -y
+conda activate liverseg
 
 3、Install Pytorch : pip install torch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 --index-url https://download.pytorch.org/whl/cu117
 
@@ -74,56 +71,120 @@ scikit-image==0.13.1
 SimpleITK==1.0.1
 pydensecrf==1.0rc3
 
-### 1、Pre-process 
+## 🏋️ Training Pipeline
 
-1.1  First run ./data_prepare/split.py for Data partition.
+We provide a step-by-step guide to prepare data and train **OurMethod** for multi-phase liver tumor segmentation. 
 
-1.2  run ./data_prepare/generate_2D_train.py and data_prepare/generate_2D_test.py for period data processing, then you can see the result in ./processed/train and ./processed/test
+### 1️⃣ Dataset Splitting
+Split patients into **train / val / test** subsets:  
+```bash
+python multi_phase/multi_phase/dataset_prepare/generate_patients_txt.py
 
-### 2、Generate distance map
+### 2️⃣ Liver Box Generation
 
-- 2.1  Run boundary_map/liver_distance_map.py and boundary_map/tumor_distance_map.py to generate the boundary maps for liver and tumor, respectively.
+Generate liver bounding boxes to accelerate training and reduce background noise:
 
-- 2.2  Using the ./dataset/dataset_multiphase.py loader if you want to train without loading the distance map, or the dataset/dataset_multiphase_boundarymap.py loader if you want to load the distance map during training.
+python multi_phase/multi_phase/dataset_prepare/generate_liverbox.py
 
-### 3、Training Process
+📦 Outputs: liver box annotations.
 
-3.1  The model is trained by running ./bash/train_multiphase.sh (You can modify the hyperparameters as prompted.), and the weights of its runs are stored in the model_out folder. If using BED-Loss training, the initial weights of BED-Loss in Eq. (8) are set to \(\alpha\)=0.49, \(\beta \)=0.49 and \(\gamma\)=0.02. If the training loss plateaus for 10 epochs, the weights are dynamically adjusted to a 4:4:2 ratio, and you can download the model weights from the Google Drive link above, and if the link is broken, you can contact the corresponding author to obtain and update the URL.
+### 3️⃣ Data Preprocessing
 
-### 4、Evalution
+Convert raw volumes into 2D slices for training and testing:
 
-4.1  Run ./bash/evaluate.sh, replacing the training weights and test data addresses in evaluate.sh. The test results will be saved in the model_out folder for viewing.
+# Generate testing slices
+python multi_phase/multi_phase/dataset_prepare/rawdata_2D_test.py
 
-##  二、Singe-Phase Experiments
+# Generate training slices
+python multi_phase/multi_phase/dataset_prepare/rawdata_2D_train.py
 
-### 1、Data-Preparation & Pre-process 
+🖼️ Outputs saved in process_data/train/ and process_data/test/.
 
-You can jump to the download link of the LiTS2017 dataset according to the link in the dataset introduction, after downloading the datasets, then put the original image and mask in ./LiTS2017/data/ct and ./LiTS2017/data/label. Then you can divide it according to a certain ratio, run ./LiTS2017/data_prepare/preprocess_lits2017_png.py to convert .nii files into .png files for training. The file structure is as follows
+### 4️⃣ Train/Test File Lists
 
-- './LiTS2017/data_prepare/'
-  - preprocess_lits2017_png.py
-- './LiTS2017/data/'
-  - LITS2017
-    - ct
-      - .nii
-    - label
-      - .nii
-  - trainImage_lits2017_png
-    - .png
-  - trainMask_lits2017_png
-    - .png
+Generate .txt files for dataset indexing:
 
-### 2、Generate distance map
+python multi_phase/multi_phase/dataset_prepare/get_txt.py
 
-- 2.1  Run boundary_map/liver_distance_map.py and boundary_map/tumor_distance_map.py to generate the boundary maps for liver and tumor, respectively.
+📂 Outputs:
 
-- 2.2  You can modify the ./LiTS2017/dataset/dataset.py data loader to decide whether to add liver or tumor distance map.
+multi_phase/multi_phase/lists/lists_liver/train.txt
 
-### 3、Training Process
+multi_phase/multi_phase/lists/lists_liver/test_vol.txt
 
-3.1  The model is trained by running ./LiTS2017/train/train.py (You can modify the hyperparameters as prompted.), and the weights of its runs are stored. If using BED-Loss training, the initial weights of BED-Loss in Eq. (8) are set to \(\alpha\)=0.49, \(\beta \)=0.49 and \(\gamma\)=0.02. If the training loss plateaus for 10 epochs, the weights are dynamically adjusted to a 4:4:2 ratio, and you can download the model weights from the Google Drive link above, and if the link is broken, you can contact the corresponding author to obtain and update the URL.
+### 5️⃣ Start Training
 
-### 4、Evalution
+Use the provided training script:
 
-4.1  Run ./LiTS2017/test/test.py, replacing the training weights and test data addresses in evaluate.sh. The test results will be saved.
+Use the provided training script, Inside train_sformer.sh, training is launched with:
+
+export CUDA_VISIBLE_DEVICES=
+cd ..
+python train.py \
+  --n_gpu 3 \
+  --root_path /path to train/ \
+  --test_path /path to test/ \
+  --module /path to your model/ \
+  --dataset Multiphase \
+  --eval_interval x # Test every few rounds \
+  --max_epochs 100 \
+  --batch_size 8 \
+  --model_name Fusion \
+  --img_size 256 \
+  --base_lr 0.01 \
+
+⚙️ Hyperparameters Explained
+
+--n_gpu: number of GPUs to use (e.g., 3 for multi-GPU training).
+
+--root_path: training dataset path.
+
+--test_path: testing dataset path.
+
+--module: network architecture (e.g., HAformerSpatialFrequency).
+
+--dataset: dataset type (here: Multiphase).
+
+--eval_interval: evaluate every N epochs.
+
+--max_epochs: maximum number of training epochs (default 100).
+
+--batch_size: training batch size (e.g., 8).
+
+--model_name: name for saving checkpoints (default: Fusion).
+
+--img_size: input image size (default: 256 × 256).
+
+--base_lr: base learning rate (e.g., 0.01).
+
+### 📊 Outputs
+
+Training checkpoints and logs are saved in:
+
+multi_phase/multi_phase/model_out/
+
+Results include:
+
+✔️ Best model weights
+
+✔️ Training/validation curves
+
+✔️ Evaluation metrics (DSC, Jaccard, HD95, ASSD)
+
+✨ After training, you can run evaluation and visualize results directly from the saved models.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
