@@ -1,8 +1,15 @@
-# MADF-Net: Multi-phase Attentional Deep Fusion Network for Liver Tumor Segmentation  
+# Clinically-Guided Multi-Phase Fusion Network for Liver Tumor Segmentation  
 
 ### Pre-trained Weights  
 
 The weights of the pre-trained MADF-Net in 1P、2P、3P comparative analysis could be downloaded [Here](https://drive.google.com/drive/folders/1FSgOOqEkdjfBTvYudSf9NAxIwG3CxWxW?usp=drive_link)  
+
+## Overview
+
+This repository provides the official implementation of **OurMethod**, a clinically-guided multi-phase fusion network designed for accurate liver tumor segmentation from contrast-enhanced CT (CECT).  
+Unlike existing fusion strategies that treat phases equally, OurMethod leverages the **clinical dominance of the portal venous (PV) phase** and explicitly models phase-specific propagation orders to achieve more reliable multi-phase feature integration.  
+
+Extensive experiments on **PLC-CECT** and **MPLL** demonstrate that OurMethod consistently outperforms prior approaches (e.g., MW-UNet, MCDA-Net), setting a new state-of-the-art in both segmentation accuracy and boundary precision.
 
 ## Datasets  
 
@@ -13,38 +20,37 @@ The weights of the pre-trained MADF-Net in 1P、2P、3P comparative analysis cou
 
 <img src="" width="500">
 
-## Contrast-Enhanced CT (CECT)： 
+## 👉 Why Multi-Phase CECT?
 
-Contrast-enhanced CT (CECT), which captures dynamic tissue attenuation changes through contrast agent administration at different time points, offers a more informative alternative. It typically includes non-contrast (NC), arterial (ART), portal venous (PV), and delayed (DL) phases. These phases provide complementary information such as early vascular features, clear hepatic parenchyma structure, hyper-perfused regions, and delayed enhancement or washout effects, all of which help delineate lesion boundaries and improve segmentation accuracy. 
+Contrast-enhanced CT captures dynamic enhancement patterns via multiple phases:  
+- **NC (non-contrast):** baseline anatomy  
+- **ART (arterial):** highlights early vascular supply  
+- **PV (portal venous):** best lesion–parenchyma contrast  
+- **DL (delayed):** reveals washout and boundary refinement 
 
-The complementary nature of these phases presents a valuable opportunity to improve segmentation performance through multi-phase fusion. 
+These phases are complementary, making multi-phase fusion a powerful strategy for robust lesion segmentation.
 
-## Existing Fusion Method： 
+## Limitations of Existing Fusion Methods
+- **Input-level fusion:** simple concatenation, ignores phase importance  
+- **Feature-level fusion:** self-attention, but equal weighting across phases  
+- **Decision-level fusion:** ensemble of outputs, but lacks inter-phase guidance  
 
-- **Input-Level Fusion: Concatenates arterial (ART), portal venous (PV), and delayed (DL) phase CT images.**
+➡️ A key drawback: they treat all phases equally, ignoring **clinical hierarchy (PV > ART > DL)**.  
 
-- **Feature-Level Fusion: Employs self-attention to dynamically weight phase-specific features.**
+## Our Contributions
+- **Systematic single-phase analysis:** On MPLL, PV phase delivers the strongest segmentation performance, consistent with its clinical reliability.  
+- **Clinically-guided propagation order:** We design a Multi-Phase Cross-Query Sequential (MCQS) branch. Ablation (Table 3) shows that **PV→ART→DL** order consistently achieves the best performance (76.29% DSC, 61.67% Jaccard, lowest HD$_{95}$ and ASSD).  
+- **Proposed network:** A fusion architecture that integrates ART, PV, and DL with guided feature interaction and deep refinement.  
+- **Novel loss function (BED-Loss):** Incorporates boundary-aware supervision for sharper tumor delineation.
 
-- **Decision-Level Fusion: Fuses predictions from individual phases and the fusion branch.**
-
-## The existing fusion methods's shortcoming：
-
-Treating each phase equally during fusion, failing to account for their clinical significance and complementary properties. This results in suboptimal performance, especially in scenarios with blurred lesion boundaries or small tumors.
-
-## We achieved:
-
-- **Conducts a systematic analysis of the segmentation performance of different contrast-enhanced CT phases using a clinical multi-phase liver tumor dataset (MPLL) collected from the First Affiliated Hospital of USTC. The results show that the PV phase contributes most significantly to segmentation performance, underscoring its importance both clinically and empirically.**
-
-- **Based on these findings, we propose MADF-Net, a multi-phase attention-based fusion network that integrates features from the ART, PV, and DL phases, enabling deep inter-phase feature interaction across multiple stages to enhance segmentation performance.**
-
-- **We design a novel dynamically weighted loss function, BED-Loss, which integrates regional and boundary information to improve the model’s sensitivity to tumor contours.**
+## Results
+- **On PLC-CECT:** OurMethod achieves 76.26% DSC (+1.09%), 62.44% Jaccard (+2.22%), 24.63 HD$_{95}$ (↓4.59), and 14.67 ASSD (↓2.08), surpassing MCDA-Net and MW-UNet.  
+- **On MPLL:** OurMethod sets new SOTA with 76.29% DSC and 61.67% Jaccard, while also reducing boundary errors.  
+- **Qualitative analysis:** Compared to MCDA-Net, OurMethod yields sharper boundaries (e.g., case 1) and more accurate detection of small nodules (e.g., case 3).  
 
 Extensive experiments on two benchmark datasets, LiTS2017 and MPLL, demonstrate the superiority of our proposed method, which significantly outperforms existing state-of-the-art approaches.
 
-## Experiments：Single-Phase & Multi-Phase
-
-- **一、 Multi-Phase Experiments：In the MPLL folder**
-- **二、Single-Phase Experiments：In the LiTS2017 folder**
+## Usage
 
 ##  一、Multi-Phase Experiments
 
