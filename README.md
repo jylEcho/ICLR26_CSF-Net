@@ -1,6 +1,6 @@
 # Clinically-Guided Multi-Phase Fusion Network for Liver Tumor Segmentation  
 
-
+<img src="https://github.com/jylEcho/ICLR26_CSF-Net/blob/main/img/V11.0.png" width="500">
 ## Overview
 
 This repository provides the official implementation of **OurMethod**, a clinically-guided multi-phase fusion network designed for accurate liver tumor segmentation from contrast-enhanced CT (CECT).  
@@ -34,7 +34,8 @@ These phases are complementary, making multi-phase fusion a powerful strategy fo
 
 ➡️ A key drawback: they treat all phases equally, ignoring **clinical hierarchy (PV > ART > DL)**.  
 
-<img src="https://github.com/jylEcho/ICLR26_CSF-Net/blob/main/img/Swin-V5.0.png" width="500">
+
+<img src="https://github.com/jylEcho/ICLR26_CSF-Net/blob/main/img/V6.0.png" width="500">
 
 ## Our Contributions
 - **Systematic single-phase analysis:** On MPLL, PV phase delivers the strongest segmentation performance, consistent with its clinical reliability.  
