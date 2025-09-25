@@ -6,12 +6,12 @@ The weights of the pre-trained MADF-Net in 1P、2P、3P comparative analysis cou
 
 ## Datasets  
 
-| Dataset                                                      | Phases            | Samples | Disease types |
-| ------------------------------------------------------------ | ----------------- | ------- | ------------------ | ------------------- |
-| [PLC-CECT](https://github.com/ljwa2323/PLC_CECT) | Multi (NC/ART/PV/DL)  | 278 patients / 152,965 slices     |  |
-| MPLL                                             | Multi (ART/PV/DL)     | 141 patients / 952,601 slices     | |
+| Dataset                                          | Phases                |                     Disease types |
+| -------------------------------------------------| --------------------- | --------------------------------- | 
+| [PLC-CECT](https://github.com/ljwa2323/PLC_CECT) | Multi (NC/ART/PV/DL)  | 278 patients / 152,965 slices     | 
+| MPLL                                             | Multi (ART/PV/DL)     | 141 patients / 952,601 slices     | 
 
-<img src="https://github.com/jylEcho/MADF-Net/blob/main/image/Dataset.png?raw=true" width="500">
+<img src="" width="500">
 
 ## Contrast-Enhanced CT (CECT)： 
 
