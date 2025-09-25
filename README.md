@@ -11,9 +11,9 @@ Extensive experiments on **PLC-CECT** and **MPLL** demonstrate that OurMethod co
 ## Datasets  
 
 | Dataset                                          | Phases                |                     Disease types |
-| -------------------------------------------------| --------------------- | --------------------------------- | 
-| [PLC-CECT](https://github.com/ljwa2323/PLC_CECT) | Multi (NC/ART/PV/DL)  | 278 patients / 152,965 slices     | 
-| MPLL                                             | Multi (ART/PV/DL)     | 141 patients / 952,601 slices     | 
+| -------------------------------------------------| --------------------- | ------------------- | 
+| [PLC-CECT](https://github.com/ljwa2323/PLC_CECT) | Multi (NC/ART/PV/DL)  |  152,965 slices     | 
+| MPLL                                             | Multi (ART/PV/DL)     |  952,601 slices     | 
 
 <img src="https://github.com/jylEcho/ICLR26_CSF-Net/blob/main/img/Swin-V5.0.png" width="500">
 
@@ -33,6 +33,8 @@ These phases are complementary, making multi-phase fusion a powerful strategy fo
 - **Decision-level fusion:** ensemble of outputs, but lacks inter-phase guidance  
 
 ➡️ A key drawback: they treat all phases equally, ignoring **clinical hierarchy (PV > ART > DL)**.  
+
+<img src="https://github.com/jylEcho/ICLR26_CSF-Net/blob/main/img/Swin-V5.0.png" width="500">
 
 ## Our Contributions
 - **Systematic single-phase analysis:** On MPLL, PV phase delivers the strongest segmentation performance, consistent with its clinical reliability.  
