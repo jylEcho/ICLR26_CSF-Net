@@ -15,8 +15,9 @@ Extensive experiments on **PLC-CECT** and **MPLL** demonstrate that OurMethod co
 | [PLC-CECT](https://github.com/ljwa2323/PLC_CECT) | Multi (NC/ART/PV/DL)  |  152,965 slices     | 
 | MPLL                                             | Multi (ART/PV/DL)     |  952,601 slices     | 
 
-<img src="https://github.com/jylEcho/ICLR26_CSF-Net/blob/main/img/Swin-V5.0.png" width="500">
-
+<center>
+  <img src="https://github.com/jylEcho/ICLR26_CSF-Net/blob/main/img/Swin-V5.0.png" width="800">
+</center>
 ## 👉 Why Multi-Phase CECT?
 
 Contrast-enhanced CT captures dynamic enhancement patterns via multiple phases:  
