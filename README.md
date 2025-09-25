@@ -39,8 +39,9 @@ These phases are complementary, making multi-phase fusion a powerful strategy fo
 
 ## ✨ Framework
 
-| ![](https://github.com/jylEcho/ICLR26_CSF-Net/blob/main/img/V6.0.png) |
-|:--:|
+<center>
+  <img src="https://github.com/jylEcho/ICLR26_CSF-Net/blob/main/img/V6.0.png" width="800" alt="">
+</center>
 
 ## Our Contributions
 - **Systematic single-phase analysis:** On MPLL, PV phase delivers the strongest segmentation performance, consistent with its clinical reliability.  
