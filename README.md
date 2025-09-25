@@ -1,7 +1,8 @@
 # Clinically-Guided Multi-Phase Fusion Network for Liver Tumor Segmentation  
 
-| ![](https://github.com/jylEcho/ICLR26_CSF-Net/blob/main/img/V11.0.png) |
-|:--:|
+<center>
+  <img src="https://github.com/jylEcho/ICLR26_CSF-Net/blob/main/img/V11.0.png?raw=true" width="800" alt="">
+</center>
 
 ## Overview
 
