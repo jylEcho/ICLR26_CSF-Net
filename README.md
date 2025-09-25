@@ -36,6 +36,7 @@ These phases are complementary, making multi-phase fusion a powerful strategy fo
 
 ➡️ A key drawback: they treat all phases equally, ignoring **clinical hierarchy (PV > ART > DL)**.  
 
+## Framework
 
 | ![](https://github.com/jylEcho/ICLR26_CSF-Net/blob/main/img/V6.0.png)) |
 |:--:|
