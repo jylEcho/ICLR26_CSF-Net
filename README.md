@@ -1,6 +1,8 @@
 # Clinically-Guided Multi-Phase Fusion Network for Liver Tumor Segmentation  
 
-<img src="https://github.com/jylEcho/ICLR26_CSF-Net/blob/main/img/V11.0.png" width="500">
+<center>
+  <img src="https://github.com/jylEcho/ICLR26_CSF-Net/blob/main/img/V11.0.png" width="800">
+</center>
 ## Overview
 
 This repository provides the official implementation of **OurMethod**, a clinically-guided multi-phase fusion network designed for accurate liver tumor segmentation from contrast-enhanced CT (CECT).  
@@ -16,7 +18,7 @@ Extensive experiments on **PLC-CECT** and **MPLL** demonstrate that OurMethod co
 | MPLL                                             | Multi (ART/PV/DL)     |  952,601 slices     | 
 
 <center>
-  <img src="https://github.com/jylEcho/ICLR26_CSF-Net/blob/main/img/Swin-V5.0.png" width="800">
+  <img src="https://github.com/jylEcho/ICLR26_CSF-Net/blob/main/img/Swin-V5.0.png" width="500">
 </center>
 ## 👉 Why Multi-Phase CECT?
 
@@ -35,9 +37,9 @@ These phases are complementary, making multi-phase fusion a powerful strategy fo
 
 ➡️ A key drawback: they treat all phases equally, ignoring **clinical hierarchy (PV > ART > DL)**.  
 
-
-<img src="https://github.com/jylEcho/ICLR26_CSF-Net/blob/main/img/V6.0.png" width="500">
-
+<center>
+  <img src="https://github.com/jylEcho/ICLR26_CSF-Net/blob/main/img/V6.0.png" width="800">
+</center>
 ## Our Contributions
 - **Systematic single-phase analysis:** On MPLL, PV phase delivers the strongest segmentation performance, consistent with its clinical reliability.  
 - **Clinically-guided propagation order:** We design a Multi-Phase Cross-Query Sequential (MCQS) branch. Ablation (Table 3) shows that **PV→ART→DL** order consistently achieves the best performance (76.29% DSC, 61.67% Jaccard, lowest HD$_{95}$ and ASSD).  
