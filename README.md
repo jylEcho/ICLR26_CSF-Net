@@ -77,7 +77,7 @@ We provide a step-by-step guide to prepare data and train **OurMethod** for mult
 
 ### 1️⃣ Dataset Splitting
 Split patients into **train / val / test** subsets:  
-```bash
+
 python multi_phase/multi_phase/dataset_prepare/generate_patients_txt.py
 
 ### 2️⃣ Liver Box Generation
