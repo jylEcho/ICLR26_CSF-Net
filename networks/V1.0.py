@@ -222,12 +222,6 @@ class SwinUnet(nn.Module):
         # )
 
 
-        self.Conv21 = conv_block(1536, 768)
-        self.Conv31 = conv_block(3072, 1536)
-        self.Conv32 = conv_block(1536, 768)
-        self.Conv41 = conv_block(6144, 3072)
-        self.Conv42 = conv_block(3072, 1536)
-        self.Conv43 = conv_block(1536, 768)
 
     def reshape(self, encoder_output):
         spatial_size = int(encoder_output.shape[1] ** 0.5)
@@ -264,10 +258,6 @@ class SwinUnet(nn.Module):
         encoder_output_v_fusion = encoder_output_v
         encoder_output_adv_fusion =torch.cat((encoder_output_adv,encoder_output_a_fusion, encoder_output_d_fusion, encoder_output_v_fusion), dim=2)
 
-        encoder_output_a_reshapped = self.reshape(encoder_output_a_fusion)
-        encoder_output_d_reshapped = self.reshape(encoder_output_d_fusion)
-        encoder_output_v_reshapped = self.reshape(encoder_output_v_fusion)
-        encoder_output_adv_reshapped = self.reshape(encoder_output_adv_fusion)
 
         conv_a = self.Conv21(encoder_output_a_reshapped)
         print(f"conv_a shape: {conv_a.shape}")
@@ -296,12 +286,8 @@ class SwinUnet(nn.Module):
         # print(f"pv_out shape: {pv_out.shape}")
         # print(f"dl_out shape: {dl_out.shape}")
 
-        pv_out_shape = self.shape(pv_out)
-        x = self.swin_unet4.forward_up_features(pv_out_shape, x_downsample_v)
 
         x = self.swin_unet4.up_x4(x)
-        print(f"x shape: {x.shape}")
-
         return x
 
 
