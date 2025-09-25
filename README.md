@@ -38,7 +38,7 @@ These phases are complementary, making multi-phase fusion a powerful strategy fo
 
 ## ✨ Framework
 
-| ![](https://github.com/jylEcho/ICLR26_CSF-Net/blob/main/img/V6.0.png)) |
+| ![](https://github.com/jylEcho/ICLR26_CSF-Net/blob/main/img/V6.0.png) |
 |:--:|
 
 ## Our Contributions
