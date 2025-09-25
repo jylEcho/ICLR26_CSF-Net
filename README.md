@@ -1,8 +1,5 @@
 # Clinically-Guided Multi-Phase Fusion Network for Liver Tumor Segmentation  
 
-### Pre-trained Weights  
-
-The weights of the pre-trained MADF-Net in 1P、2P、3P comparative analysis could be downloaded [Here](https://drive.google.com/drive/folders/1FSgOOqEkdjfBTvYudSf9NAxIwG3CxWxW?usp=drive_link)  
 
 ## Overview
 
