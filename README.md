@@ -1,8 +1,8 @@
 # Clinically-Guided Multi-Phase Fusion Network for Liver Tumor Segmentation  
 
-<div style="text-align: center;">
-  <img src="https://github.com/jylEcho/ICLR26_CSF-Net/blob/main/img/V11.0.png" width="800">
-</div>
+| ![](https://github.com/jylEcho/ICLR26_CSF-Net/blob/main/img/V11.0.png) |
+|:--:|
+
 ## Overview
 
 This repository provides the official implementation of **OurMethod**, a clinically-guided multi-phase fusion network designed for accurate liver tumor segmentation from contrast-enhanced CT (CECT).  
